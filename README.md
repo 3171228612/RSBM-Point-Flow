@@ -12,8 +12,8 @@ Based on [Rectified Point Flow](https://github.com/GradientSpaces/Rectified-Poin
 
 ```bash
 cd /mlx_devbox/users/zhaoliangjie
-git clone https://github.com/3171228612/RSBM-Point-Flow.git Rectified-Point-Flow-main
-cd Rectified-Point-Flow-main
+git clone https://github.com/3171228612/RSBM-Point-Flow.git RSBM-Point-Flow-main
+cd RSBM-Point-Flow-main
 ```
 
 ### 2. Install Dependencies
@@ -142,7 +142,7 @@ python sample.py --config-name RPF_base_demo \
 ## Project Structure (RSBM additions)
 
 ```
-Rectified-Point-Flow-main/
+RSBM-Point-Flow-main/
 ├── rectified_point_flow/
 │   ├── rsbm_modeling.py          # RSBM model (inherits RPF)
 │   ├── rsbm_pcr_bridge.py        # ε-Rectified Bridge math
