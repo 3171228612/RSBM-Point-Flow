@@ -3,7 +3,7 @@ _target_: lightning.pytorch.Trainer
 accelerator: auto
 devices: auto
 strategy: ddp
-precision: "16-mixed"
+precision: "bf16-mixed"
 default_root_dir: ${log_dir}
 
 max_epochs: 2000
