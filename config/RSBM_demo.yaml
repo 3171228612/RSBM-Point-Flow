@@ -1,0 +1,50 @@
+# RSBM Inference / Evaluation Demo
+#
+# Usage:
+#   python sample.py --config-name RSBM_demo ckpt_path=<your_ckpt>
+#
+# Override sampling steps for ablation:
+#   python sample.py --config-name RSBM_demo model.inference_sampling_steps=5
+
+defaults:
+  - model: rsbm_point_flow
+  - data: ikea_partnet_everyday_twobytwo_modelnet_tudl
+  - trainer: infer
+  - loggers: wandb
+  - visualizer: flow
+  - _self_
+  - override hydra/hydra_logging: disabled
+
+# Seed
+seed: 42
+
+# Disable hydra logging
+hydra:
+  verbose: false
+  output_subdir: null
+  run:
+    dir: .
+
+# Data
+data_root: ./demo/data
+data:
+  dataset_names: []      # [] means using all datasets in the data_root
+  batch_size: 1
+  num_workers: 1
+
+# Log directory
+log_dir: ./demo/
+
+# Checkpoint path
+ckpt_path: null
+
+# Model settings
+model:
+  encoder_ckpt: null
+  flow_model_ckpt: null
+  n_generations: 3
+  save_results: true
+  # RSBM settings — override here for ablation
+  inference_sampling_steps: 3     # 3 Heun steps (NFE=5)
+  inference_sampler: "heun"
+  epsilon: 0.5

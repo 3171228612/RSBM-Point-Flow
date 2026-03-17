@@ -1,0 +1,40 @@
+# Inference demo
+
+defaults:
+  - model: rectified_point_flow
+  - data: ikea_partnet_everyday_twobytwo_modelnet_tudl
+  - trainer: infer
+  - loggers: wandb
+  - visualizer: flow
+  - _self_
+  - override hydra/hydra_logging: disabled
+
+# Seed
+seed: 42
+
+# Disable hydra logging
+hydra:
+  verbose: false
+  output_subdir: null
+  run:
+    dir: .
+  
+# Data
+data_root: ./demo/data
+data:
+  dataset_names: []      # [] means using all datasets in the data_root
+  batch_size: 1
+  num_workers: 1
+
+# Log directory
+log_dir: ./demo/
+
+# Checkpoint path
+ckpt_path: null          # when null, the checkpoint will be downloaded from Hugging Face
+
+# Model settings
+model:
+  encoder_ckpt: null
+  flow_model_ckpt: null
+  n_generations: 3
+  save_results: true     # save evaluation results to log_dir/results

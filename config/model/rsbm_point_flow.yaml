@@ -1,0 +1,43 @@
+# RSBM Point Flow Model Configuration
+# ε-Rectified Schrödinger Bridge Matching for Point Cloud Registration
+#
+# Key differences from RPF (rectified_point_flow.yaml):
+#   1. Uses RSBMPointFlow instead of RectifiedPointFlow
+#   2. epsilon: 0.5 (ε-rectification parameter)
+#   3. inference_sampling_steps: 3 (vs RPF's 50)
+#   4. inference_sampler: heun (vs RPF's euler)
+
+defaults:
+  - encoder@feature_extractor: ptv3_object
+  - flow_model: point_cloud_dit
+
+_target_: rectified_point_flow.rsbm_modeling.RSBMPointFlow
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: True
+  lr: 1e-4
+  betas: [0.95, 0.999]
+  weight_decay: 1e-6
+  eps: 1e-8
+
+lr_scheduler:
+  _target_: torch.optim.lr_scheduler.MultiStepLR
+  _partial_: True
+  milestones: [1000, 1200, 1400, 1600, 1800]
+  gamma: 0.5
+
+# ======== Shared with RPF ========
+timestep_sampling: "uniform"           # RSBM needs uniform! u_shaped causes divergence near t=1
+anchor_free: true
+n_generations: 1
+loss_type: "mse"
+frozen_encoder: false
+
+# ======== RSBM-specific ========
+epsilon: 0.5                      # ε=0.5 same as paper, train with full bridge stochasticity
+sigma_max: 1.0                    # max noise level (=1.0 for [0,1] time range)
+inference_sampler: "heun"          # Heun 2nd-order ODE solver
+inference_sampling_steps: 50       # Validation: use 50 steps to see acc during training
+                                   # Test time: override to 3 steps to show speed advantage
+sigma_schedule: "linear"           # sigma schedule: "linear", "karras", "uniform"
