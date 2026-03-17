@@ -25,7 +25,7 @@
 set -e
 
 # ======================== Configuration ========================
-DATA_ROOT="/mlx_devbox/users/zhaoliangjie/dataset"
+DATA_ROOT="/mlx_devbox/users/zhaoliangjie/data"
 CODE_ROOT="/mlx_devbox/users/zhaoliangjie/RSBM-Point-Flow-main"
 ENCODER_CKPT="./weights/RPF_base_full_anchorfree_ep2000.ckpt"
 

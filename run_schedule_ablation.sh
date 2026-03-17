@@ -15,7 +15,7 @@
 set -e
 
 # ---- Configuration ----
-DATA_ROOT="/mlx_devbox/users/zhaoliangjie/dataset"
+DATA_ROOT="/mlx_devbox/users/zhaoliangjie/data"
 RSBM_CKPT="./output/RSBM_eps05_val50/last.ckpt"
 RPF_CKPT="./output/RPF_base/last.ckpt"
 # If using pretrained RPF, uncomment:

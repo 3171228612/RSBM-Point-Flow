@@ -5,19 +5,19 @@ Usage:
     # Benchmark RSBM (3 Heun steps, NFE=5)
     python benchmark_inference.py --config-name RSBM_demo \
         data=small4 \
-        data_root="/mlx_devbox/users/zhaoliangjie/dataset" \
+        data_root="/mlx_devbox/users/zhaoliangjie/data" \
         ckpt_path="./output/RSBM_eps05_heun3/last.ckpt"
 
     # Benchmark RPF baseline (50 Euler steps, NFE=50)
     python benchmark_inference.py --config-name RPF_base_demo \
         data=small4 \
-        data_root="/mlx_devbox/users/zhaoliangjie/dataset" \
+        data_root="/mlx_devbox/users/zhaoliangjie/data" \
         ckpt_path="./weights/RPF_base_full_anchorfree_ep2000.ckpt"
 
     # Quick comparison with fewer warmup/runs
     python benchmark_inference.py --config-name RSBM_demo \
         data=small4 \
-        data_root="/mlx_devbox/users/zhaoliangjie/dataset" \
+        data_root="/mlx_devbox/users/zhaoliangjie/data" \
         ckpt_path="./output/RSBM_eps05_heun3/last.ckpt" \
         +benchmark.num_warmup=5 \
         +benchmark.num_runs=20

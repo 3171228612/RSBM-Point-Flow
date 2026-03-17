@@ -95,7 +95,7 @@ bash run_full_experiments.sh phase4
 
 ```bash
 python train.py --config-name "RSBM_main" \
-    data_root="/mlx_devbox/users/zhaoliangjie/dataset" \
+    data_root="/mlx_devbox/users/zhaoliangjie/data" \
     trainer.devices=8 \
     trainer.strategy="ddp" \
     data.batch_size=40 \
@@ -108,7 +108,7 @@ python train.py --config-name "RSBM_main" \
 
 ```bash
 python train.py --config-name "RPF_base_main" \
-    data_root="/mlx_devbox/users/zhaoliangjie/dataset" \
+    data_root="/mlx_devbox/users/zhaoliangjie/data" \
     trainer.devices=8 \
     trainer.strategy="ddp" \
     data.batch_size=40 \
@@ -124,7 +124,7 @@ python train.py --config-name "RPF_base_main" \
 python sample.py --config-name RSBM_demo \
     ckpt_path="./output/RSBM_6ds_ep2000/last.ckpt" \
     data=ikea \
-    data_root="/mlx_devbox/users/zhaoliangjie/dataset" \
+    data_root="/mlx_devbox/users/zhaoliangjie/data" \
     model.inference_sampling_steps=5 \
     visualizer.renderer=none
 
@@ -132,7 +132,7 @@ python sample.py --config-name RSBM_demo \
 python sample.py --config-name RPF_base_demo \
     ckpt_path="./output/RPF_6ds_ep2000/last.ckpt" \
     data=ikea \
-    data_root="/mlx_devbox/users/zhaoliangjie/dataset" \
+    data_root="/mlx_devbox/users/zhaoliangjie/data" \
     model.inference_sampling_steps=50 \
     visualizer.renderer=none
 ```
