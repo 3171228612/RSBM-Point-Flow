@@ -55,7 +55,7 @@ bash run_full_experiments.sh verify
 
 Quick test: 2 GPUs, 2 epochs, IKEA only. Takes ~5 minutes. If it passes, multi-GPU is working.
 
-### 5. Train (4+4 GPUs, ~3-4 days)
+### 5. Train RSBM (8 GPUs, ~1.5-2 days)
 
 ```bash
 # Run in background
@@ -65,7 +65,9 @@ nohup bash run_full_experiments.sh phase2 > train.log 2>&1 &
 tail -f train.log
 ```
 
-This trains **RSBM** (GPU 0-3) and **RPF baseline** (GPU 4-7) simultaneously, 2000 epochs each, 6 datasets.
+8 卡全部用于 **RSBM** 训练（bf16-mixed），2000 epochs，6 datasets。RPF 对比直接用预训练权重，不需要重新训。
+
+支持**断点续训**：中断后重新执行同一命令即可自动恢复。如需从头训练，先删除 `./output/RSBM_6ds_ep2000`。
 
 ### 6. Ablation Experiments (~30 min)
 
@@ -95,19 +97,6 @@ bash run_full_experiments.sh phase4
 
 ```bash
 python train.py --config-name "RSBM_main" \
-    data_root="/mlx_devbox/users/zhaoliangjie/data" \
-    trainer.devices=8 \
-    trainer.strategy="ddp" \
-    data.batch_size=40 \
-    data.num_workers=16 \
-    model.encoder_ckpt="./weights/RPF_base_full_anchorfree_ep2000.ckpt" \
-    +model.frozen_encoder=true
-```
-
-### Train RPF baseline (same conditions)
-
-```bash
-python train.py --config-name "RPF_base_main" \
     data_root="/mlx_devbox/users/zhaoliangjie/data" \
     trainer.devices=8 \
     trainer.strategy="ddp" \
